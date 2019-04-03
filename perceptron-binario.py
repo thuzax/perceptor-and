@@ -9,10 +9,10 @@ class Perceptron(object):
     def activation_fn(self, x):
         #print( " x=", x)
         #funcao binaria
-        # return 1 if x >= 0 else 0
+        return 1 if x >= 0 else 0
 
         #funcao bipolar
-        return 1 if x >= 0 else -1
+        # return 1 if x >= 0 else -1
 
 
 
@@ -40,61 +40,60 @@ class Perceptron(object):
 
 
 if __name__ == '__main__':
+    print("----------------------AND----------------------")
+    # AND training
     X = [
             [0, 0],
             [0, 1],
             [1, 0],
             [1, 1]
         ]
-    d = [-1, -1, -1, 1]
-
-    # X = [
-    #         [0, 0, 0],
-    #         [0, 1, 0],
-    #         [1, 0, 0],
-    #         [1, 1, 0],
-    #         [0, 0, 1],
-    #         [0, 1, 1],
-    #         [1, 0, 1],
-    #         [1, 1, 1]
-    #     ]
-    # d = [0, 0, 0, 0, 0, 0, 0, 1]
+    d = [0, 0, 0, 1]
 
     input_size = 2
-    perceptron = Perceptron(input_size)
-    perceptron.fit(X, d)
-    print("The W results = ",perceptron.W)
+    perceptron_and = Perceptron(input_size)
+    perceptron_and.fit(X, d)
+    print("The W results = ",perceptron_and.W)
 
-    #input value
-    testes=[
-        [1, 0],
-        [1, 1],
+    # AND testing
+    testes = [
         [0, 0],
-        [0, 1]
+        [0, 1],
+        [1, 0],
+        [1, 1]
     ]
 
-    # testes=[
-    #     [1, 0, 0],
-    #     [1, 1, 0],
-    #     [0, 0, 0],
-    #     [0, 1, 0],
-    #     [1, 0, 1],
-    #     [1, 1, 1],
-    #     [0, 0, 1],
-    #     [0, 1, 1]
-    # ]
+    print("Tests and results:")
     for t in testes:
         x = [1] + t
-        print("The input value (x) =", t)
-        print( "The predict - y =", perceptron.predict(x))
+        print("\t", x[1], " AND ", x[2], " = ", perceptron_and.predict(x))
 
-    # change the atrributes values
-    perceptron = Perceptron(input_size, lr=0.1, epochs=50)
-    perceptron.fit(X, d)
-    print("The new W results = ", perceptron.W)
+    print("----------------------OR----------------------")
+    # OR training
+    X = [
+            [0, 0],
+            [0, 1],
+            [1, 0],
+            [1, 1]
+        ]
+    d = [0, 1, 1, 1]
 
-    #input value
+    input_size = 2
+    perceptron_or = Perceptron(input_size)
+    perceptron_or.fit(X, d)
+    print("The W results = ",perceptron_or.W)
+
+    # OR testing
+    testes = [
+        [0, 0],
+        [0, 1],
+        [1, 0],
+        [1, 1]
+    ]
+
+    print("Tests and results:")
     for t in testes:
         x = [1] + t
-        print("The input value (x) =", t)
-        print( "The predict - y =", perceptron.predict(x))
+        print("\t", x[1], " OR ", x[2], " = ", perceptron_or.predict(x))
+
+
